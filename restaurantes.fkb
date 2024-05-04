@@ -1,0 +1,4 @@
+restaurante_sirve(Restaurante1,flan)
+restaurante_sirve(Restaurante1,torta_helada)
+restaurante_sirve(Restaurante1,arroz_pollo)
+restaurante_sirve(Restaurante1,flan)
