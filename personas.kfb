@@ -1,0 +1,4 @@
+#Dietas
+usa_dieta(Max,Omni)
+usa_dieta(Mery,Vegetariano)
+usa_dieta(Margaret,LactoOvoVegetariano)
