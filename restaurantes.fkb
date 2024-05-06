@@ -1,13 +1,12 @@
 restaurante_sirve(Restaurante1,flan)
+restaurante_sirve(Restaurante1,kebab)
 restaurante_sirve(Restaurante1,torta_helada)
 restaurante_sirve(Restaurante1,arroz_pollo)
-restaurante_sirve(Restaurante1,flan)
 
 restaurante_sirve(Restaurante2,pastaBolognesa)
 restaurante_sirve(Restaurante2,ensaladaCebolla)
 restaurante_sirve(Restaurante2,ceviche)
 restaurante_sirve(Restaurante2,tacos)
-restaurante_sirve(Restaurante2,taco)
 restaurante_sirve(Restaurante2,sopaPollo)
 restaurante_sirve(Restaurante2,pizzaHawaiana)
 
