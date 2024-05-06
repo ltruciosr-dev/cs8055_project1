@@ -1,4 +1,52 @@
-#Plato con ingredientes
+#INGREDIENTES SECUNDARIOS
+plato_usa(Carne_Molida,Res)
+
+plato_usa(Tortillas,Harina_Trigo)
+plato_usa(Tortillas,Huevos_Gallina)
+
+plato_usa(Pasta,Harina_Trigo)
+plato_usa(Pasta,Huevo_Gallina)
+plato_usa(Pasta,Leche)
+
+plato_usa(Masa_Pizza,Pan)
+plato_usa(Pan_Pita,Pan)
+
+plato_usa(Queso_Parmesano,Queso)
+plato_usa(Queso_Mozzarella,Queso)
+plato_usa(Queso_Cheddar,Queso)
+plato_usa(Queso_Ricotta,Queso)
+plato_usa(Queso_Mascarpone,Queso)
+plato_usa(Crema_de_Queso,Queso)
+
+plato_usa(Galleta,Harina_Trigo)
+plato_usa(Galleta,Azucar)
+
+plato_usa(Chorizo,Cerdo)
+
+plato_usa(Cafe_Expreso,Cafe)
+
+plato_usa(Azucar,Cania_de_Azucar)
+
+plato_usa(Cacao_en_Polvo,Cacao)
+
+plato_usa(Chocolate,Cacao)
+plato_usa(Chocolate,Azucar)
+plato_usa(Chocolate,Leche)
+
+plato_usa(Nata_Montada,Nata)
+
+plato_usa(Leche_Condensada,Leche)
+plato_usa(Leche_Condensada,Azucar)
+
+plato_usa(Leche_Evaporada,Leche)
+
+plato_usa(Nutella,Nuez)
+plato_usa(Nutella,Leche)
+plato_usa(Nutella,Azucar)
+
+
+#PLATO CON INGREDIENTES
+#=========================================================================
 plato_usa(arroz_pollo,Arroz)
 plato_usa(arroz_pollo,Pollo)
 plato_usa(arroz_pollo,Aceite_Vegetal)
@@ -21,8 +69,9 @@ plato_usa(ensalada_frutas,Fresa)
 plato_usa(ensalada_frutas,Palta)
 plato_usa(ensalada_frutas,Zanahoria)
 
-plato_usa(flan,leche)
-plato_usa(flan,harina)
+plato_usa(flan,Leche)
+plato_usa(flan,Harina)
+plato_usa(flan,Azucar)
 
 plato_usa(torta_helada,Leche)
 plato_usa(torta_helada,Harina)
@@ -178,8 +227,15 @@ plato_usa(crepas_nutella,Huevos_Gallina)
 plato_usa(crepas_nutella,Nutella)
 ################################################################
 
-#Plato con tipos
 
+#TIPOS POR DEFECTO
+#=========================================================================
+plato_tipo(No_Entrada,Entrada)
+plato_tipo(No_Principal,Principal)
+plato_tipo(No_Postre,Postre)
+
+#PLATO CON TIPOS
+#=========================================================
 plato_tipo(ensalada_fresca,Entrada)
 plato_tipo(ensalada_frutas,Entrada)
 plato_tipo(ensalada_cebolla,Entrada)
@@ -204,15 +260,26 @@ plato_tipo(ceviche_mixto,Principal)
 plato_tipo(ramen,Principal)
 
 
-plato_tipo(flan,postre)
-plato_tipo(torta_helada,postre)
-plato_tipo(jugo_fresa,bebida)
-plato_tipo(jugo_platano,bebida)
-plato_tipo(tiramisu, postre)
-plato_tipo(cheesecake,postre)
-plato_tipo(mousse_chocolate,postre)
-plato_tipo(crema_catalana,postre)
-plato_tipo(pastel_tres_leches,postre)
-plato_tipo(tarta_manzana,postre)
-plato_tipo(helado_vainilla, postre)
-plato_tipo(crepas_nutella,postre)
+plato_tipo(flan,Postre)
+plato_tipo(torta_helada,Postre)
+plato_tipo(tiramisu, Postre)
+plato_tipo(cheesecake,Postre)
+plato_tipo(mousse_chocolate,Postre)
+plato_tipo(crema_catalana,Postre)
+plato_tipo(pastel_tres_leches,Postre)
+plato_tipo(tarta_manzana,Postre)
+plato_tipo(helado_vainilla, Postre)
+plato_tipo(crepas_nutella,Postre)
+
+plato_tipo(jugo_fresa,Bebida)
+plato_tipo(jugo_platano,Bebida)
+
+#DEFECTO DE NUTRICIONAL DE PLATOS
+plato_valor_nutricional(No_Entrada,('Carbohidratos','Proteinas','Grasas'),(0,0,0))
+plato_valor_nutricional(No_Principal,('Carbohidratos','Proteinas','Grasas'),(0,0,0))
+plato_valor_nutricional(No_Postre,('Carbohidratos','Proteinas','Grasas'),(0,0,0))
+
+#DEFECTO DE NUTRICIONAL DE DIETAS
+plato_es_dieta(No_Entrada,Vegetariana)
+plato_es_dieta(No_Principal,Vegetariana)
+plato_es_dieta(No_Postre,Vegetariana)
