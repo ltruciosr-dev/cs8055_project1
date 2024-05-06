@@ -1,0 +1,268 @@
+#RELACIONADAS CON INGREDIENTE
+#================================================================================
+ingrediente_nutriente
+    foreach
+        ingredientes.ingrediente_es_tipo($ingrediente,$tipo)
+        ingredientes.tipo_es_nutriente($tipo,$nutriente)
+    assert
+        ingredientes.ingrediente_es_nutriente($ingrediente,$nutriente)
+
+ingrediente_origen
+    foreach
+        ingredientes.ingrediente_es_tipo($ingrediente,$tipo)
+        ingredientes.tipo_es_origen($tipo,$origen)
+    assert
+        ingredientes.ingrediente_es_origen($ingrediente,$origen)
+
+ingrediente_descripcion
+    foreach
+        ingredientes.ingrediente_es_tipo($ingrediente,$tipo)
+        ingredientes.ingrediente_es_nutriente($ingrediente,$nutriente)
+        ingredientes.ingrediente_es_origen($ingrediente,$origen)
+    assert
+        ingredientes.ingrediente_es($ingrediente,$tipo,$nutriente,$origen)
+
+#RELACIONADAS CON PLATO
+#================================================================================
+plato_usa_plato
+    foreach
+        platos.plato_usa($plato,$plato_secundario)
+        platos.plato_usa($plato_secundario,$ingrediente)
+    assert
+        platos.plato_usa($plato,$ingrediente)
+
+plato_listado_ingredientes
+    foreach
+        platos.plato_usa($plato,$_)
+        python listado_ingredientes = []
+        forall
+            platos.plato_usa($plato,$ingrediente)
+            python listado_ingredientes.append($ingrediente)
+        $listado_ingredientes = tuple(listado_ingredientes)
+    assert
+        platos.plato_tiene_ingredientes($plato,$listado_ingredientes)
+
+plato_nutrientes
+    foreach
+        platos.plato_usa($plato,$ingrediente)
+        ingredientes.ingrediente_es_nutriente($ingrediente,$nutriente)
+    assert
+        platos.plato_tiene_nutriente($plato,$nutriente)
+
+plato_listado_nutrientes
+    foreach
+        platos.plato_tiene_nutriente($plato,$_)
+        python lista_nutrientes = []
+        forall
+            platos.plato_tiene_nutriente($plato,$nutriente)
+            python lista_nutrientes.append($nutriente)
+        $lista_nutrientes = tuple(lista_nutrientes)
+    assert
+        platos.plato_lista_nutrientes($plato,$lista_nutrientes)
+
+plato_carbohidratos
+    foreach
+        platos.plato_usa($plato,$_)
+        python tot = 0
+        forall
+            platos.plato_usa($plato,$ingrediente)
+            ingredientes.ingrediente_es_nutriente($ingrediente,Carbohidratos)
+            python tot = tot + 1
+        $tot = int(tot)
+    assert
+        platos.plato_conteo_carbohidratos($plato, $tot)
+
+plato_proteinas
+    foreach
+        platos.plato_usa($plato,$_)
+        python tot = 0
+        forall
+            platos.plato_usa($plato,$ingrediente)
+            ingredientes.ingrediente_es_nutriente($ingrediente,Proteinas)
+            python tot = tot + 1
+        $tot = int(tot)
+    assert
+        platos.plato_conteo_proteinas($plato, $tot)
+
+plato_grasas
+    foreach
+        platos.plato_usa($plato,$_)
+        python tot = 0
+        forall
+            platos.plato_usa($plato,$ingrediente)
+            ingredientes.ingrediente_es_nutriente($ingrediente,Grasas)
+            python tot = tot + 1
+        $tot = int(tot)
+    assert
+        platos.plato_conteo_grasas($plato, $tot)
+
+#SEUDO VALOR NURICIONAL DEL PLATO
+#=================================================================
+valor_nutricional
+    foreach
+        platos.plato_conteo_carbohidratos($plato, $n1)
+        platos.plato_conteo_proteinas($plato, $n2)
+        platos.plato_conteo_grasas($plato, $n3)
+    assert
+        platos.plato_valor_nutricional($plato,('Carbohidratos','Proteinas','Grasas'),($n1,$n2,$n3))
+
+#DIETA DEL PLATO
+#=================================================================
+plato_dieta
+    foreach
+        platos.plato_tiene_ingredientes($plato,$listado_ingredientes)
+        python
+            dietaVegetariano = False
+            dietaLactoOvo = False
+            dietaOmni = False
+            dieta = ''
+        forall
+            $ingrediente in $listado_ingredientes
+            ingredientes.ingrediente_es($ingrediente,$tipo,$nutriente,$origen)
+            python
+                if $origen == 'Vegetal':
+                    dietaVegetariano = True
+                if $tipo == 'Derivado_Lacteo' or $tipo == 'Huevos':
+                    dietaLactoOvo = True
+                elif $origen == 'Animal':
+                    dietaOmni = True
+        python
+            if dietaVegetariano:
+                dieta = 'Vegetariana'
+            if dietaLactoOvo:
+                dieta = 'LactoOvoVegetariana'
+            if dietaOmni:
+                dieta = 'Omni'
+        $dieta = str(dieta)
+    assert
+        platos.plato_es_dieta($plato,$dieta)
+
+#RELACIONADOS CON MENU DE RESTAURANTE
+#================================================================================
+restaurante_tiene_entrada
+    foreach
+        restaurantes.restaurante_sirve($restaurante,$_)
+        forall
+            restaurantes.restaurante_sirve($restaurante,$plato)
+        require
+            notany
+                platos.plato_tipo($plato,Entrada)
+    assert
+        restaurantes.restaurante_sirve($restaurante, No_Entrada)
+
+restaurante_tiene_principal
+    foreach
+        restaurantes.restaurante_sirve($restaurante,$_)
+        forall
+            restaurantes.restaurante_sirve($restaurante,$plato)
+        require
+            notany
+                platos.plato_tipo($plato,Principal)
+    assert
+        restaurantes.restaurante_sirve($restaurante, No_Principal)
+
+restaurante_tiene_postre
+    foreach
+        restaurantes.restaurante_sirve($restaurante,$_)
+        forall
+            restaurantes.restaurante_sirve($restaurante,$plato)
+        require
+            notany
+                platos.plato_tipo($plato,Postre)
+    assert
+        restaurantes.restaurante_sirve($restaurante, No_Postre)
+
+coleccionar_menu_entrada
+    foreach
+        restaurantes.restaurante_sirve($restaurante, $plato)
+        platos.plato_tipo($plato,Entrada)
+    assert
+        restaurantes.ofrece_menu_entrada($restaurante, ($plato))
+
+coleccionar_menu_principal
+    foreach
+        restaurantes.ofrece_menu_entrada($restaurante, ($entrada))
+        restaurantes.restaurante_sirve($restaurante, $plato)
+        platos.plato_tipo($plato,Principal)
+    assert
+        restaurantes.ofrece_menu_principal($restaurante, ($entrada,$plato))
+
+coleccionar_menu
+    foreach
+        restaurantes.ofrece_menu_principal($restaurante, ($entrada,$principal))
+        restaurantes.restaurante_sirve($restaurante, $plato)
+        platos.plato_tipo($plato,Postre)
+    assert
+        restaurantes.ofrece_menu($restaurante, ($entrada,$principal,$plato))
+
+menu_conteo_nutricion
+    foreach
+        restaurantes.ofrece_menu($restaurante, ($plato1,$plato2,$plato3))
+        platos.plato_valor_nutricional($plato1,('Carbohidratos','Proteinas','Grasas'),($n1,$n2,$n3))
+        platos.plato_valor_nutricional($plato2,('Carbohidratos','Proteinas','Grasas'),($n4,$n5,$n6))
+        platos.plato_valor_nutricional($plato3,('Carbohidratos','Proteinas','Grasas'),($n7,$n8,$n9))
+        $nplato1 = $n1 + $n2 + $n3
+        $nplato2 = $n4 + $n5 + $n6
+        $nplato3 = $n7 + $n8 + $n9
+    assert
+        restaurantes.menu_valor_nutricional($restaurante,($plato1,$plato2,$plato3),($nplato1,$nplato2,$nplato3))
+
+menu_dieta
+    foreach
+        restaurantes.ofrece_menu($restaurante, $listado_platos)
+        python
+            dietaVegetariano = False
+            dietaLactoOvo = False
+            dietaOmni = False
+            dieta = ''
+        forall
+            $plato in $listado_platos
+            platos.plato_es_dieta($plato,$dieta)
+            python
+                if $dieta == 'Vegetariana':
+                    dietaVegetariano = True
+                if $dieta == 'LactoOvoVegetariana':
+                    dietaLactoOvo = True
+                elif $dieta == 'Omni':
+                    dietaOmni = True
+        python
+            if dietaVegetariano:
+                dieta = 'Vegetariana'
+            if dietaLactoOvo:
+                dieta = 'LactoOvoVegetariana'
+            if dietaOmni:
+                dieta = 'Omni'
+        $dieta = str(dieta)
+    assert
+        restaurantes.menu_es_dieta($restaurante,$listado_platos,$dieta)
+
+#RELACIONADOS CON RESTAURANTE
+#======================================================================================================
+restaurante_dieta
+    foreach
+        restaurantes.restaurante_sirve($restaurante, $_)
+        python
+            dietaVegetariano = False
+            dietaLactoOvo = False
+            dietaOmni = False
+            dieta = ''
+        forall
+            restaurantes.restaurante_sirve($restaurante, $plato)
+            platos.plato_es_dieta($plato,$dieta)
+            python
+                if $dieta == 'Vegetariana':
+                    dietaVegetariano = True
+                if $dieta == 'LactoOvoVegetariana':
+                    dietaLactoOvo = True
+                elif $dieta == 'Omni':
+                    dietaOmni = True
+        python
+            if dietaVegetariano:
+                dieta = 'Vegetariana'
+            if dietaLactoOvo:
+                dieta = 'LactoOvoVegetariana'
+            if dietaOmni:
+                dieta = 'Omni'
+        $dieta = str(dieta)
+    assert
+        restaurantes.restaurante_es_dieta($restaurante,$dieta)
