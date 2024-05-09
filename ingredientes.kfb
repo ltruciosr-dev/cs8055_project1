@@ -1,4 +1,38 @@
-#Relacion entre ingredientes y tipos
+# RELACION ENTRE DERIVADOS E INGREDIENTES
+#=========================================================================
+derivado_tiene(Carne_Molida,Res)
+derivado_tiene(Tortillas,Harina_Trigo)
+derivado_tiene(Tortillas,Huevos_Gallina)
+derivado_tiene(Pasta,Harina_Trigo)
+derivado_tiene(Pasta,Huevo_Gallina)
+derivado_tiene(Pasta,Leche)
+derivado_tiene(Masa_Pizza,Pan)
+derivado_tiene(Pan_Pita,Pan)
+derivado_tiene(Queso_Parmesano,Queso)
+derivado_tiene(Queso_Mozzarella,Queso)
+derivado_tiene(Queso_Cheddar,Queso)
+derivado_tiene(Queso_Ricotta,Queso)
+derivado_tiene(Queso_Mascarpone,Queso)
+derivado_tiene(Crema_de_Queso,Queso)
+derivado_tiene(Galleta,Harina_Trigo)
+derivado_tiene(Galleta,Azucar)
+derivado_tiene(Chorizo,Cerdo)
+derivado_tiene(Cafe_Expreso,Cafe)
+derivado_tiene(Cacao_en_Polvo,Cacao)
+derivado_tiene(Chocolate,Cacao)
+derivado_tiene(Chocolate,Azucar)
+derivado_tiene(Chocolate,Leche)
+derivado_tiene(Nata_Montada,Nata)
+derivado_tiene(Leche_Condensada,Leche)
+derivado_tiene(Leche_Condensada,Azucar)
+derivado_tiene(Leche_Evaporada,Leche)
+derivado_tiene(Nutella,Nuez)
+derivado_tiene(Nutella,Leche)
+derivado_tiene(Nutella,Azucar)
+
+
+# RELACION ENTRE INGREDIENTES Y TIPOS
+#=========================================================================
 ingrediente_es_tipo(Lechuga,Verduras_Hortalizas)
 ingrediente_es_tipo(Tomate,Verduras_Hortalizas)
 ingrediente_es_tipo(Cebolla,Verduras_Hortalizas)
@@ -13,11 +47,11 @@ ingrediente_es_tipo(Alga_Nori,Verduras_Hortalizas)
 ingrediente_es_tipo(Pepino,Verduras_Hortalizas)
 ingrediente_es_tipo(Azafran,Verduras_Hortalizas)
 
+ingrediente_es_tipo(Azucar,Hierba_Perenne)
 ingrediente_es_tipo(Cania_de_Azucar,Hierba_Perenne)
 ingrediente_es_tipo(Brotes_Bambu,Hierba_Perenne)
 
 ingrediente_es_tipo(Canela,Derivado_de_Arbol)
-
 
 ingrediente_es_tipo(Fresa,Frutas)
 ingrediente_es_tipo(Naranja,Frutas)
@@ -91,13 +125,15 @@ ingrediente_es_tipo(Gelatina,Gelatina)
 
 ingrediente_es_tipo(Harina_Trigo,Harina)
 
-ingrediente_es_tipo(Polvo_Hornear,Compuesto_Cabohidrato)
+ingrediente_es_tipo(Polvo_Hornear,Compuesto_Carbohidrato)
 
-#Relacion entre tipos y nutrientes
-tipo_es_nutriente(Verduras_Hortalizas,Carbohidratos)
+# RELACION ENTRE TIPOS Y NUTRIENTES
+#=========================================================================
+tipo_es_nutriente(Verduras_Hortalizas,Vitaminas)
+tipo_es_nutriente(Frutas,Vitaminas)
 tipo_es_nutriente(Hierba_Perenne,Carbohidratos)
+tipo_es_nutriente(Harina,Carbohidratos)
 tipo_es_nutriente(Derivado_de_Arbol,Carbohidratos)
-tipo_es_nutriente(Frutas,Carbohidratos)
 tipo_es_nutriente(Cereales,Carbohidratos)
 tipo_es_nutriente(Tuberculos,Carbohidratos)
 tipo_es_nutriente(Legumbres,Carbohidratos)
@@ -108,12 +144,12 @@ tipo_es_nutriente(Carne_Magra,Proteinas)
 tipo_es_nutriente(Carne_Roja,Proteinas)
 tipo_es_nutriente(Derivado_Lacteo,Proteinas)
 tipo_es_nutriente(Huevos,Proteinas)
-tipo_es_nutriente(Aceite,Grasas)
 tipo_es_nutriente(Gelatina,Proteinas)
-tipo_es_nutriente(Harina,Carbohidratos)
 tipo_es_nutriente(Compuesto_Carbohidrato,Carbohidratos)
+tipo_es_nutriente(Aceite,Grasas)
 
-#Relacion entre tipos y origen
+# RELACION ENTRE TIPOS Y ORIGEN
+#=========================================================================
 tipo_es_origen(Verduras_Hortalizas,Vegetal)
 tipo_es_origen(Hierba_Perenne,Vegetal)
 tipo_es_origen(Derivado_de_Arbol,Vegetal)
