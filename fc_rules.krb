@@ -1,4 +1,4 @@
-#RELACIONADAS CON INGREDIENTE
+# RELACIONADAS CON INGREDIENTE
 #================================================================================
 ingrediente_nutriente
     foreach
@@ -22,91 +22,99 @@ ingrediente_descripcion
     assert
         ingredientes.ingrediente_es($ingrediente,$tipo,$nutriente,$origen)
 
-#RELACIONADAS CON PLATO
-#================================================================================
-plato_usa_plato
-    foreach
-        platos.plato_usa($plato,$plato_secundario)
-        platos.plato_usa($plato_secundario,$ingrediente)
-    assert
-        platos.plato_usa($plato,$ingrediente)
 
-plato_listado_ingredientes
+# RELACIONADAS CON PLATO
+#================================================================================
+plato_lista_ingredientes
     foreach
         platos.plato_usa($plato,$_)
-        python listado_ingredientes = []
-        forall
+        python lista_ingredientes = []
+        forall # for ingredientes
             platos.plato_usa($plato,$ingrediente)
-            python listado_ingredientes.append($ingrediente)
-        $listado_ingredientes = tuple(listado_ingredientes)
+            ingredientes.ingrediente_es_tipo($ingrediente,$tipo)
+            python lista_ingredientes.append($ingrediente)
+        forall # for variantes
+            platos.plato_usa($plato,$derivado)
+            ingredientes.derivado_tiene($derivado,$ingrediente)
+            python lista_ingredientes.append($ingrediente)
+        $lista_ingredientes = tuple(lista_ingredientes)
     assert
-        platos.plato_tiene_ingredientes($plato,$listado_ingredientes)
+        platos.plato_tiene_ingredientes($plato,$lista_ingredientes)
 
-plato_nutrientes
+plato_listado_tipos
     foreach
-        platos.plato_usa($plato,$ingrediente)
-        ingredientes.ingrediente_es_nutriente($ingrediente,$nutriente)
+        platos.plato_tiene_ingredientes($plato,$lista_ingredientes)
+        python lista_tipos = []
+        forall
+            $ingrediente in $lista_ingredientes
+            ingredientes.ingrediente_es($ingrediente,$tipo,$nutriente,$origen)
+            python lista_tipos.append($tipo)
+        $lista_tipos = tuple(lista_tipos)
     assert
-        platos.plato_tiene_nutriente($plato,$nutriente)
+        platos.plato_tiene_tipos($plato,$lista_tipos)
 
 plato_listado_nutrientes
     foreach
-        platos.plato_tiene_nutriente($plato,$_)
+        platos.plato_tiene_ingredientes($plato,$lista_ingredientes)
         python lista_nutrientes = []
         forall
-            platos.plato_tiene_nutriente($plato,$nutriente)
+            $ingrediente in $lista_ingredientes
+            ingredientes.ingrediente_es($ingrediente,$tipo,$nutriente,$origen)
             python lista_nutrientes.append($nutriente)
         $lista_nutrientes = tuple(lista_nutrientes)
     assert
-        platos.plato_lista_nutrientes($plato,$lista_nutrientes)
+        platos.plato_tiene_nutrientes($plato,$lista_nutrientes)
 
 plato_carbohidratos
     foreach
-        platos.plato_usa($plato,$_)
+        platos.plato_tiene_ingredientes($plato,$lista_ingredientes)
         python tot = 0
         forall
-            platos.plato_usa($plato,$ingrediente)
-            ingredientes.ingrediente_es_nutriente($ingrediente,Carbohidratos)
-            python tot = tot + 1
+            $ingrediente in $lista_ingredientes
+            ingredientes.ingrediente_es($ingrediente,$tipo,$nutriente,$origen)
+            python if $nutriente == "Carbohidratos": tot += 1
         $tot = int(tot)
     assert
         platos.plato_conteo_carbohidratos($plato, $tot)
 
 plato_proteinas
     foreach
-        platos.plato_usa($plato,$_)
+        platos.plato_tiene_ingredientes($plato,$lista_ingredientes)
         python tot = 0
         forall
-            platos.plato_usa($plato,$ingrediente)
-            ingredientes.ingrediente_es_nutriente($ingrediente,Proteinas)
-            python tot = tot + 1
+            $ingrediente in $lista_ingredientes
+            ingredientes.ingrediente_es($ingrediente,$tipo,$nutriente,$origen)
+            python if $nutriente == "Proteinas": tot += 1
         $tot = int(tot)
     assert
         platos.plato_conteo_proteinas($plato, $tot)
 
 plato_grasas
     foreach
-        platos.plato_usa($plato,$_)
+        platos.plato_tiene_ingredientes($plato,$lista_ingredientes)
         python tot = 0
         forall
-            platos.plato_usa($plato,$ingrediente)
-            ingredientes.ingrediente_es_nutriente($ingrediente,Grasas)
-            python tot = tot + 1
+            $ingrediente in $lista_ingredientes
+            ingredientes.ingrediente_es($ingrediente,$tipo,$nutriente,$origen)
+            python if $nutriente == "Grasas": tot += 1
         $tot = int(tot)
     assert
         platos.plato_conteo_grasas($plato, $tot)
 
-#SEUDO VALOR NURICIONAL DEL PLATO
+
+# PSEUDO VALOR NURICIONAL DEL PLATO
 #=================================================================
 valor_nutricional
     foreach
         platos.plato_conteo_carbohidratos($plato, $n1)
         platos.plato_conteo_proteinas($plato, $n2)
         platos.plato_conteo_grasas($plato, $n3)
+        $valor_nutricional = ($n1, $n2, $n3)
     assert
-        platos.plato_valor_nutricional($plato,('Carbohidratos','Proteinas','Grasas'),($n1,$n2,$n3))
+        platos.plato_valor_nutricional($plato,$valor_nutricional)
 
-#DIETA DEL PLATO
+
+# DIETA DEL PLATO
 #=================================================================
 plato_dieta
     foreach
@@ -137,7 +145,8 @@ plato_dieta
     assert
         platos.plato_es_dieta($plato,$dieta)
 
-#RELACIONADOS CON MENU DE RESTAURANTE
+
+# RELACIONADOS CON MENU DE RESTAURANTE
 #================================================================================
 restaurante_tiene_entrada
     foreach
@@ -236,7 +245,7 @@ menu_dieta
     assert
         restaurantes.menu_es_dieta($restaurante,$listado_platos,$dieta)
 
-#RELACIONADOS CON RESTAURANTE
+# RELACIONADOS CON RESTAURANTE
 #======================================================================================================
 restaurante_dieta
     foreach
