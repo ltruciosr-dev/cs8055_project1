@@ -1,51 +1,4 @@
-#INGREDIENTES SECUNDARIOS
-plato_usa(Carne_Molida,Res)
-
-plato_usa(Tortillas,Harina_Trigo)
-plato_usa(Tortillas,Huevos_Gallina)
-
-plato_usa(Pasta,Harina_Trigo)
-plato_usa(Pasta,Huevo_Gallina)
-plato_usa(Pasta,Leche)
-
-plato_usa(Masa_Pizza,Pan)
-plato_usa(Pan_Pita,Pan)
-
-plato_usa(Queso_Parmesano,Queso)
-plato_usa(Queso_Mozzarella,Queso)
-plato_usa(Queso_Cheddar,Queso)
-plato_usa(Queso_Ricotta,Queso)
-plato_usa(Queso_Mascarpone,Queso)
-plato_usa(Crema_de_Queso,Queso)
-
-plato_usa(Galleta,Harina_Trigo)
-plato_usa(Galleta,Azucar)
-
-plato_usa(Chorizo,Cerdo)
-
-plato_usa(Cafe_Expreso,Cafe)
-
-plato_usa(Azucar,Cania_de_Azucar)
-
-plato_usa(Cacao_en_Polvo,Cacao)
-
-plato_usa(Chocolate,Cacao)
-plato_usa(Chocolate,Azucar)
-plato_usa(Chocolate,Leche)
-
-plato_usa(Nata_Montada,Nata)
-
-plato_usa(Leche_Condensada,Leche)
-plato_usa(Leche_Condensada,Azucar)
-
-plato_usa(Leche_Evaporada,Leche)
-
-plato_usa(Nutella,Nuez)
-plato_usa(Nutella,Leche)
-plato_usa(Nutella,Azucar)
-
-
-#PLATO CON INGREDIENTES
+# RELACION ENTRE PLATOS Y SUS INGREDIENTES, DERIVADOS
 #=========================================================================
 plato_usa(arroz_pollo,Arroz)
 plato_usa(arroz_pollo,Pollo)
@@ -81,11 +34,9 @@ plato_usa(jugo_platano,Platano)
 
 plato_usa(jugo_fresa,Fresa)
 
-
-################################################################
+plato_usa(pastaBolognesa,Tomate)
 plato_usa(pastaBolognesa,Pasta)
 plato_usa(pastaBolognesa,Carne_Molida)
-plato_usa(pastaBolognesa,Tomate)
 plato_usa(pastaBolognesa,Queso_Parmesano)
 
 plato_usa(ensaladaCebolla,Tomate)
@@ -100,9 +51,9 @@ plato_usa(ceviche,Cilantro)
 plato_usa(ceviche,Mazorca)
 
 plato_usa(tacos,Cordero)
-plato_usa(tacos,Tortillas)
 plato_usa(tacos,Palta)
 plato_usa(taco,Pollo)
+plato_usa(tacos,Tortillas)
 
 plato_usa(sopaPollo,Pollo)
 plato_usa(sopaPollo,Zanahoria)
@@ -110,40 +61,39 @@ plato_usa(sopaPollo,Cebolla)
 plato_usa(sopaPollo,Apio)
 plato_usa(sopaPollo,Fideos)
 
-plato_usa(pizzaHawaiana,Masa_Pizza)
-plato_usa(pizzaHawaiana,Cordero)
 plato_usa(pizzaHawaiana,Pinna)
-plato_usa(pizzaHawaiana,Queso_Mozzarella)
 plato_usa(pizzaHawaiana,Tomate)
+plato_usa(pizzaHawaiana,Masa_Pizza)
+plato_usa(pizzaHawaiana,Queso_Mozzarella)
 
 plato_usa(polloAsado,Pollo)
 plato_usa(polloAsado,Limon)
 plato_usa(polloAsado,Ajo)
 
-plato_usa(pastaPesto,Pasta)
 plato_usa(pastaPesto,Tomate)
 plato_usa(pastaPesto,Queso_Parmesano)
+plato_usa(pastaPesto,Pasta)
 
 plato_usa(hamburguesa,Pollo)
-plato_usa(hamburguesa,Pan_Pita)
 plato_usa(hamburguesa,Lechuga)
 plato_usa(hamburguesa,Tomate)
-plato_usa(hamburguesa,Queso_Cheddar)
 plato_usa(hamburguesa,Cebolla)
+plato_usa(hamburguesa,Queso_Cheddar)
+plato_usa(hamburguesa,Pan_Pita)
 
 plato_usa(arrozChaufa,Arroz)
 plato_usa(arrozChaufa,Pollo)
-plato_usa(arrozChaufa,Huevos_Gallina)
 plato_usa(arrozChaufa,Cebolla)
 plato_usa(arrozChaufa,Zanahoria)
 plato_usa(arrozChaufa,Alverjas)
+plato_usa(arrozChaufa,Huevos_Gallina)
 
-plato_usa(lasagna,Pasta)
+plato_usa(lasagna,Tomate)
 plato_usa(lasagna,Carne_Molida)
 plato_usa(lasagna,Queso_Ricotta)
-plato_usa(lasagna,Tomate)
 plato_usa(lasagna,Queso_Mozzarella)
 plato_usa(lasagna,Queso_Parmesano)
+plato_usa(lasagna,Pasta)
 
 plato_usa(sushiMaki,Arroz)
 plato_usa(sushiMaki,Alga_Nori)
@@ -154,23 +104,22 @@ plato_usa(sushiMaki,Palta)
 plato_usa(paella,Arroz)
 plato_usa(paella,Pollo)
 plato_usa(paella,Camarones)
-plato_usa(paella,Chorizo)
 plato_usa(paella,Pimiento)
 plato_usa(paella,Azafran)
+plato_usa(paella,Chorizo)
 
 plato_usa(ceviche_mixto,Camarones)
 plato_usa(ceviche_mixto,Caballa)
-plato_usa(ceviche_mixto,Camarones)
 plato_usa(ceviche_mixto,Calamar)
 plato_usa(ceviche_mixto,Limon)
 plato_usa(ceviche_mixto,Cebolla)
 plato_usa(ceviche_mixto,Cilantro)
 
 plato_usa(kebab,Res)
-plato_usa(kebab,Pan_Pita)
 plato_usa(kebab,Lechuga)
 plato_usa(kebab,Tomate)
 plato_usa(kebab,Cebolla)
+plato_usa(kebab,Pan_Pita)
 
 plato_usa(ramen,Fideos)
 plato_usa(ramen,Cerdo)
@@ -178,24 +127,24 @@ plato_usa(ramen,Huevos_Gallina)
 plato_usa(ramen,Cebolla)
 plato_usa(ramen,Brotes_Bambu)
 
-plato_usa(tiramisu,Cafe_Expreso)
-plato_usa(tiramisu,Queso_Mascarpone)
 plato_usa(tiramisu,Huevos_Gallina)
 plato_usa(tiramisu,Azucar)
 plato_usa(tiramisu,Mantequilla)
 plato_usa(tiramisu,Cacao_en_Polvo)
+plato_usa(tiramisu,Queso_Mascarpone)
+plato_usa(tiramisu,Cafe_Expreso)
 
-plato_usa(cheesecake,Galleta)
-plato_usa(cheesecake,Crema_de_Queso)
 plato_usa(cheesecake,Azucar)
 plato_usa(cheesecake,Huevos_Gallina)
 plato_usa(cheesecake,Vainilla)
 plato_usa(cheesecake,Mantequilla)
+plato_usa(cheesecake,Galleta)
+plato_usa(cheesecake,Crema_de_Queso)
 
-plato_usa(mousse_chocolate,Chocolate)
 plato_usa(mousse_chocolate,Huevos_Gallina)
 plato_usa(mousse_chocolate,Azucar)
 plato_usa(mousse_chocolate,Nata_Montada)
+plato_usa(mousse_chocolate,Chocolate)
 
 plato_usa(crema_catalana,Leche)
 plato_usa(crema_catalana,Huevos_Gallina)
@@ -204,11 +153,11 @@ plato_usa(crema_catalana,Harina_Trigo)
 plato_usa(crema_catalana,Canela)
 
 plato_usa(pastel_tres_leches,Harina_Trigo)
-plato_usa(pastel_tres_leches,Leche_Condensada)
-plato_usa(pastel_tres_leches,Leche_Evaporada)
 plato_usa(pastel_tres_leches,Huevos_Gallina)
 plato_usa(pastel_tres_leches,Azucar)
 plato_usa(pastel_tres_leches,Polvo_Hornear)
+plato_usa(pastel_tres_leches,Leche_Condensada)
+plato_usa(pastel_tres_leches,Leche_Evaporada)
 
 plato_usa(tarta_manzana,Manzana)
 plato_usa(tarta_manzana,Harina_Trigo)
@@ -225,17 +174,14 @@ plato_usa(crepas_nutella,Harina_Trigo)
 plato_usa(crepas_nutella,Leche)
 plato_usa(crepas_nutella,Huevos_Gallina)
 plato_usa(crepas_nutella,Nutella)
-################################################################
 
 
-#TIPOS POR DEFECTO
-#=========================================================================
+# RELACION ENTRE PLATOS Y TIPOS (DE PLATO)
+#=========================================================
 plato_tipo(No_Entrada,Entrada)
 plato_tipo(No_Principal,Principal)
 plato_tipo(No_Postre,Postre)
 
-#PLATO CON TIPOS
-#=========================================================
 plato_tipo(ensalada_fresca,Entrada)
 plato_tipo(ensalada_frutas,Entrada)
 plato_tipo(ensalada_cebolla,Entrada)
@@ -259,7 +205,6 @@ plato_tipo(paella,Principal)
 plato_tipo(ceviche_mixto,Principal)
 plato_tipo(ramen,Principal)
 
-
 plato_tipo(flan,Postre)
 plato_tipo(torta_helada,Postre)
 plato_tipo(tiramisu, Postre)
@@ -274,12 +219,9 @@ plato_tipo(crepas_nutella,Postre)
 plato_tipo(jugo_fresa,Bebida)
 plato_tipo(jugo_platano,Bebida)
 
-#DEFECTO DE NUTRICIONAL DE PLATOS
+
+# DEFECTO DE NUTRICIONAL DE DIETAS
+#=========================================================
 plato_valor_nutricional(No_Entrada,('Carbohidratos','Proteinas','Grasas'),(0,0,0))
 plato_valor_nutricional(No_Principal,('Carbohidratos','Proteinas','Grasas'),(0,0,0))
 plato_valor_nutricional(No_Postre,('Carbohidratos','Proteinas','Grasas'),(0,0,0))
-
-#DEFECTO DE NUTRICIONAL DE DIETAS
-plato_es_dieta(No_Entrada,Vegetariana)
-plato_es_dieta(No_Principal,Vegetariana)
-plato_es_dieta(No_Postre,Vegetariana)
