@@ -1,3 +1,5 @@
+# RELACION ENTRE RESTAURANTES Y PLATOS
+#=========================================================================
 restaurante_sirve(Restaurante1,flan)
 restaurante_sirve(Restaurante1,kebab)
 restaurante_sirve(Restaurante1,torta_helada)
