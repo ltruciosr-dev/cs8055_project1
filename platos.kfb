@@ -175,6 +175,10 @@ plato_usa(crepas_nutella,Leche)
 plato_usa(crepas_nutella,Huevos_Gallina)
 plato_usa(crepas_nutella,Nutella)
 
+plato_usa(No_Entrada, "")
+plato_usa(No_Principal, "")
+plato_usa(No_Postre, "")
+
 
 # RELACION ENTRE PLATOS Y TIPOS (DE PLATO)
 #=========================================================
@@ -218,10 +222,3 @@ plato_tipo(crepas_nutella,Postre)
 
 plato_tipo(jugo_fresa,Bebida)
 plato_tipo(jugo_platano,Bebida)
-
-
-# DEFECTO DE NUTRICIONAL DE DIETAS
-#=========================================================
-plato_valor_nutricional(No_Entrada,('Carbohidratos','Proteinas','Grasas'),(0,0,0))
-plato_valor_nutricional(No_Principal,('Carbohidratos','Proteinas','Grasas'),(0,0,0))
-plato_valor_nutricional(No_Postre,('Carbohidratos','Proteinas','Grasas'),(0,0,0))
