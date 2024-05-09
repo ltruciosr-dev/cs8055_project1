@@ -12,7 +12,8 @@ import driver
 # driver.test_plato_dieta()
 
 ''' Relacion entre restaurantes y platos '''
-driver.test_restaurante()
-# driver.test_dieta_restaurante_posibles_platos_menu()
+# driver.test_restaurante_platos()
+# driver.test_restaurante_dieta()
+driver.test_dieta_restaurante_posibles_platos_menu()
 
 # driver.test_questions()

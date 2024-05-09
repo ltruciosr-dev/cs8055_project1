@@ -93,14 +93,28 @@ def test_plato_dieta():
         sys.exit(1)
     print()
 
-def test_restaurante():
+def test_restaurante_platos():
     engine.reset()
     engine.activate('fc_rules')
-    print("TEST RESTAURANTE")
+    print("TEST RESTAURANTE PLATO")
     try:
-        with engine.prove_goal('restaurantes.restaurante_es_dieta($restaurante,$menu)') as gen:
+        with engine.prove_goal('restaurantes.restaurante_tiene_platos($restaurante,$list_platos)') as gen:
             for vars, plan in gen:
-                print("El", vars['restaurante'], "ofrece comida", vars['menu'])
+                print("El restaurante", vars['restaurante'], "ofrece comida", vars['list_platos'])
+    except Exception:
+        print("Exception")
+        krb_traceback.print_exc()
+        sys.exit(1)
+    print()
+
+def test_restaurante_dieta():
+    engine.reset()
+    engine.activate('fc_rules')
+    print("TEST RESTAURANTE DIETA")
+    try:
+        with engine.prove_goal('restaurantes.restaurante_es_dieta($restaurante,$dieta)') as gen:
+            for vars, plan in gen:
+                print("El restaurante", vars['restaurante'], "ofrece comida", vars['dieta'])
     except Exception:
         print("Exception")
         krb_traceback.print_exc()
@@ -114,7 +128,7 @@ def test_dieta_restaurante_posibles_platos_menu():
     try:
         with engine.prove_goal('restaurantes.menu_es_dieta($restaurante,$listado_platos,$dieta)') as gen:
             for vars, plan in gen:
-                print("El", vars['restaurante'], "es", vars['dieta']," para esta combinacion de platos para tu menu", vars['listado_platos'])
+                print("El", vars['restaurante'], "es", vars['dieta'],"para esta combinacion de platos para tu menu", vars['listado_platos'])
     except Exception:
         print("Exception")
         krb_traceback.print_exc()
