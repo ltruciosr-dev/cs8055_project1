@@ -1,0 +1,94 @@
+# TIPO DE DIETA
+#=========================================================================
+tipo_dieta_omnivoro_1
+    use tipo_dieta(Omni)
+    when
+        questions.cliente_hace_deporte(True)
+        questions.cliente_consume_proteina(True)
+        questions.cliente_edad($edad)
+        check $edad < 20
+        questions.cliente_consume_carne(True)
+
+tipo_dieta_vegetariano_1
+    use tipo_dieta(Vegetariana)
+    when
+        questions.cliente_hace_deporte(True)
+        questions.cliente_consume_proteina(True)
+        questions.cliente_edad($edad)
+        check $edad < 20
+        questions.cliente_consume_carne(False)
+
+tipo_dieta_omnivoro_2
+    use tipo_dieta(Omni)
+    when
+        questions.cliente_hace_deporte(True)
+        questions.cliente_consume_proteina(True)
+        questions.cliente_edad($edad)
+        check $edad >= 20
+        questions.cliente_horas_laboradas($horas)
+        check $horas > 12
+
+tipo_dieta_lactovegetariano_1
+    use tipo_dieta(LactoOvoVegetariana)
+    when
+        questions.cliente_hace_deporte(True)
+        questions.cliente_consume_proteina(True)
+        questions.cliente_edad($edad)
+        check $edad >= 20
+        questions.cliente_horas_laboradas($horas)
+        check $horas <= 12
+
+tipo_dieta_lactovegetariano_2
+    use tipo_dieta(LactoOvoVegetariana)
+    when
+        questions.cliente_hace_deporte(False)
+        questions.cliente_activo_fisicamente(True)
+        questions.cliente_edad($edad)
+        check $edad > 50
+        questions.cliente_consume_leche(True)
+
+tipo_dieta_vegetariano_2
+    use tipo_dieta(Vegetariana)
+    when
+        questions.cliente_hace_deporte(False)
+        questions.cliente_activo_fisicamente(True)
+        questions.cliente_edad($edad)
+        check $edad > 50
+        questions.cliente_consume_leche(False)
+
+tipo_dieta_omnivoro_3
+    use tipo_dieta(Omni)
+    when
+        questions.cliente_hace_deporte(False)
+        questions.cliente_activo_fisicamente(True)
+        questions.cliente_edad($edad)
+        check $edad <= 50
+        questions.cliente_horas_laboradas($horas)
+        check $horas > 12
+
+tipo_dieta_lactovegetariano_3
+    use tipo_dieta(LactoOvoVegetariana)
+    when
+        questions.cliente_hace_deporte(False)
+        questions.cliente_activo_fisicamente(True)
+        questions.cliente_edad($edad)
+        check $edad <= 50
+        questions.cliente_horas_laboradas($horas)
+        check $horas <= 12
+
+tipo_dieta_lactovegetariano_4
+    use tipo_dieta(LactoOvoVegetariana)
+    when
+        questions.cliente_hace_deporte(False)
+        questions.cliente_activo_fisicamente(False)
+        questions.cliente_peso($peso)
+        check $peso > 30
+        questions.cliente_consume_leche(True)
+
+tipo_dieta_vegetariano_3
+    use tipo_dieta(Vegetariana)
+    when
+        questions.cliente_hace_deporte(False)
+        questions.cliente_activo_fisicamente(False)
+        questions.cliente_peso($peso)
+        check $peso <= 30

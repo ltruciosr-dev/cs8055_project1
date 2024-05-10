@@ -14,6 +14,7 @@ import driver
 ''' Relacion entre restaurantes y platos '''
 # driver.test_restaurante_platos()
 # driver.test_restaurante_dieta()
-driver.test_dieta_restaurante_posibles_platos_menu()
+# driver.test_dieta_restaurante_posibles_platos_menu()
 
-# driver.test_questions()
+''' Preguntas para estimar la dieta '''
+driver.tipo_dieta()

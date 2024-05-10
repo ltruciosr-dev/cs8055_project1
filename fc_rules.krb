@@ -120,7 +120,7 @@ plato_dieta
     foreach
         platos.plato_tiene_ingredientes($plato,$listado_ingredientes)
         python
-            dietaVegetariano = False
+            dietaVegetariana = False
             dietaLactoOvo = False
             dietaOmni = False
             dieta = ''
@@ -129,13 +129,13 @@ plato_dieta
             ingredientes.ingrediente_es($ingrediente,$tipo,$nutriente,$origen)
             python
                 if $origen == 'Vegetal':
-                    dietaVegetariano = True
+                    dietaVegetariana = True
                 if $tipo == 'Derivado_Lacteo' or $tipo == 'Huevos':
                     dietaLactoOvo = True
                 elif $origen == 'Animal':
                     dietaOmni = True
         python
-            if dietaVegetariano:
+            if dietaVegetariana:
                 dieta = 'Vegetariana'
             if dietaLactoOvo:
                 dieta = 'LactoOvoVegetariana'
@@ -163,7 +163,7 @@ restaurante_dieta
     foreach
         restaurantes.restaurante_sirve($restaurante, $_)
         python
-            dietaVegetariano = False
+            dietaVegetariana = False
             dietaLactoOvo = False
             dietaOmni = False
             dieta = ''
@@ -172,13 +172,13 @@ restaurante_dieta
             platos.plato_es_dieta($plato,$dieta)
             python
                 if $dieta == 'Vegetariana':
-                    dietaVegetariano = True
+                    dietaVegetariana = True
                 if $dieta == 'LactoOvoVegetariana':
                     dietaLactoOvo = True
                 elif $dieta == 'Omni':
                     dietaOmni = True
         python
-            if dietaVegetariano:
+            if dietaVegetariana:
                 dieta = 'Vegetariana'
             if dietaLactoOvo:
                 dieta = 'LactoOvoVegetariana'
@@ -187,7 +187,19 @@ restaurante_dieta
         $dieta = str(dieta)
     assert
         restaurantes.restaurante_es_dieta($restaurante,$dieta)
-                                          
+
+# LISTA RESTAURANTES SEGUN DIETA
+#=========================================================================
+list_restaurantes_segun_dieta
+    foreach
+        restaurantes.restaurante_es_dieta($_, $dieta)
+        python lista_restaurantes = []
+        forall
+            restaurantes.restaurante_es_dieta($restaurante, $dieta)
+            python lista_restaurantes.append($restaurante)
+        $lista_restaurantes = tuple(lista_restaurantes)
+    assert
+        restaurantes.restaurantes_segun_dieta($dieta, $lista_restaurantes)
 
 # RELACIONADOS CON MENU DE RESTAURANTE
 #================================================================================
@@ -263,7 +275,7 @@ menu_dieta
     foreach
         restaurantes.ofrece_menu($restaurante, $listado_platos)
         python
-            dietaVegetariano = False
+            dietaVegetariana = False
             dietaLactoOvo = False
             dietaOmni = False
             dieta = ''
@@ -272,13 +284,13 @@ menu_dieta
             platos.plato_es_dieta($plato,$dieta)
             python
                 if $dieta == 'Vegetariana':
-                    dietaVegetariano = True
+                    dietaVegetariana = True
                 if $dieta == 'LactoOvoVegetariana':
                     dietaLactoOvo = True
                 elif $dieta == 'Omni':
                     dietaOmni = True
         python
-            if dietaVegetariano:
+            if dietaVegetariana:
                 dieta = 'Vegetariana'
             if dietaLactoOvo:
                 dieta = 'LactoOvoVegetariana'

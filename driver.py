@@ -148,3 +148,35 @@ def test_cliente_rest():
         krb_traceback.print_exc()
         sys.exit(1)
     print()
+
+def tipo_dieta():
+    engine.reset()
+    engine.activate('fc_rules')
+    engine.activate('person_rules')
+    print("TIPO DE DIETA")
+    try:
+        dieta = 'Vegetariana'
+        # with engine.prove_goal('person_rules.tipo_dieta($dieta)') as gen:
+        #     for vars, _ in gen:
+        #         dieta = vars['dieta']
+        #         print('\n')
+        #         print('*********************************************')
+        #         print(f"Se recomienda una dieta: {dieta}")
+        #         print('*********************************************')
+        #         break
+        with engine.prove_goal(f"restaurantes.restaurantes_segun_dieta({dieta}, $lista_restaurantes)") as gen:
+            for vars, _ in gen:
+                lista_restaurantes = vars['lista_restaurantes']
+                print('\n')
+                print('*********************************************')
+                print("Se recomienda estos restaurantes:")
+                for restaurante in lista_restaurantes:
+                    print(f"- Restaurante: {restaurante}")
+                print('*********************************************')
+                break
+    except Exception:
+        print("Exception")
+        krb_traceback.print_exc()
+        sys.exit(1)
+    print()
+    print("done")

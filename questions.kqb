@@ -1,0 +1,39 @@
+cliente_edad($ans)
+    Cual es tu edad?
+    ---
+    $ans = integer(1-99)
+
+cliente_peso($ans)
+    Cual es tu peso?
+    ---
+    $ans = integer(1-99)
+
+cliente_horas_laboradas($ans)
+    Cuantas horas trabajaste hoy?
+    ---
+    $ans = integer(1-99)
+
+cliente_hace_deporte($ans)
+    Te gusta el deporte?
+    ---
+    $ans = yn
+
+cliente_consume_proteina($ans)
+    Consumes proteina?
+    ---
+    $ans = yn
+
+cliente_activo_fisicamente($ans)
+    Eres activo fisicamente?
+    ---
+    $ans = yn
+
+cliente_consume_carne($ans)
+    En tu dieta consumes carne?
+    ---
+    $ans = yn
+
+cliente_consume_leche($ans)
+    En tu dieta consumes leche o sus derivados?
+    ---
+    $ans = yn
