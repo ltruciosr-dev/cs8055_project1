@@ -146,6 +146,19 @@ plato_dieta
         platos.plato_es_dieta($plato,$dieta)
 
 
+# LISTA PLATOS SEGUN DIETA
+#=================================================================
+list_platos_segun_dieta
+    foreach
+        platos.plato_es_dieta($_, $dieta)
+        python lista_platos = []
+        forall
+            platos.plato_es_dieta($plato, $dieta)
+            python lista_platos.append($plato)
+        $lista_platos = tuple(lista_platos)
+    assert
+        platos.platos_segun_dieta($dieta, $lista_platos)
+
 # RELACIONADOS CON RESTAURANTE
 #======================================================================================================
 restaurante_platos

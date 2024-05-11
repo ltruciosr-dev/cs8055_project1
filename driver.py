@@ -152,26 +152,24 @@ def test_cliente_rest():
 def tipo_dieta():
     engine.reset()
     engine.activate('fc_rules')
-    engine.activate('person_rules')
+    engine.activate('bc_rules')
     print("TIPO DE DIETA")
     try:
-        dieta = 'Vegetariana'
-        # with engine.prove_goal('person_rules.tipo_dieta($dieta)') as gen:
-        #     for vars, _ in gen:
-        #         dieta = vars['dieta']
-        #         print('\n')
-        #         print('*********************************************')
-        #         print(f"Se recomienda una dieta: {dieta}")
-        #         print('*********************************************')
-        #         break
-        with engine.prove_goal(f"restaurantes.restaurantes_segun_dieta({dieta}, $lista_restaurantes)") as gen:
+        dieta = 'LactoOvoVegetariana' # Vegetariana, LactoOvoVegetariana, Omni
+        with engine.prove_goal('bc_rules.tipo_dieta($dieta)') as gen:
             for vars, _ in gen:
-                lista_restaurantes = vars['lista_restaurantes']
+                dieta = vars['dieta']
                 print('\n')
                 print('*********************************************')
-                print("Se recomienda estos restaurantes:")
-                for restaurante in lista_restaurantes:
-                    print(f"- Restaurante: {restaurante}")
+                print(f"Se recomienda una dieta: {dieta}")
+                print('*********************************************')
+                break
+        with engine.prove_goal(f"platos.platos_segun_dieta({dieta}, $lista_platos)") as gen:
+            for vars, _ in gen:
+                lista_platos = vars['lista_platos']
+                print('\n')
+                print('*********************************************')
+                print(f"Se recomiendan estos platos: {lista_platos}")
                 print('*********************************************')
                 break
     except Exception:
